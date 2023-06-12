@@ -13,39 +13,48 @@ type CurrencyExchangePropsType = {
 };
 
 const CurrencyExchange: React.FC<CurrencyExchangePropsType> = ({
-                                                                                  currenciesName,
-                                                                                  currentCurrency,
-                                                                                  currencyRate,
-                                                                                  isBuying,
-                                                                                  amountOfBYN,
-                                                                                  amountOfCurrency,
-                                                                                  changeCurrencyField,
-                                                                                  changeAction,
-                                                                                  changeCurrentCurrency,
-                                                                              }) => {
+    currenciesName,
+    currentCurrency,
+    currencyRate,
+    isBuying,
+    amountOfBYN,
+    amountOfCurrency,
+    changeCurrencyField,
+    changeAction,
+    changeCurrentCurrency,
+}) => {
     const viewCurrency = isBuying ? (
-        <React.Fragment>
+        <>
             <label>
                 You give the next amount of BYN:
-                <input value={amountOfBYN} data-currency="byn" onChange={changeCurrencyField} />
+                <input value={amountOfBYN} data-currency="byn"
+                       onChange={changeCurrencyField} />
             </label>
             <label>
                 You get the next amount of {currentCurrency}:
-                <input value={amountOfCurrency} data-currency="currency" onChange={changeCurrencyField} />
+                <input value={amountOfCurrency} data-currency="currency"
+                       onChange={changeCurrencyField} />
             </label>
-        </React.Fragment>
-    ) : (
-        <React.Fragment>
-            <label>
-                You give the next amount of {currentCurrency}:
-                <input value={amountOfCurrency} data-currency="currency" onChange={changeCurrencyField} />
-            </label>
-            <label>
-                You get the next amount of BYN:
-                <input value={amountOfBYN} data-currency="byn" onChange={changeCurrencyField} />
-            </label>
-        </React.Fragment>
-    );
+        </>
+    ) : (<>
+        <label>
+            You give the next amount
+            of {currentCurrency}:
+            <input
+                value={amountOfCurrency}
+                data-currency="currency"
+                onChange={changeCurrencyField}
+            />
+        </label>
+        <label>
+            You get the next amount of BYN:
+            <input
+                value={amountOfBYN}
+                data-currency="byn"
+                onChange={changeCurrencyField}
+            />
+        </label>
+    </>);
 
     return (
         <div className="currency">
@@ -57,7 +66,10 @@ const CurrencyExchange: React.FC<CurrencyExchangePropsType> = ({
                         return (
                             <li
                                 key={`${index}-${currency}`}
-                                className={`currencies ${currentCurrency === currency ? 'activeCurrency' : null}`}
+                                className={`currencies ${currentCurrency ===
+                                                         currency ?
+                                                         'activeCurrency' :
+                                                         null}`}
                                 onClick={changeCurrentCurrency}
                                 data-currency={currency}
                             >
@@ -68,10 +80,12 @@ const CurrencyExchange: React.FC<CurrencyExchangePropsType> = ({
                 </ul>
             </div>
             <div className="currency-action">
-        <span className={isBuying ? 'active' : ''} data-action="buy" onClick={changeAction}>
+        <span className={isBuying ? 'active' : ''} data-action="buy"
+              onClick={changeAction}>
           Buy
         </span>
-                <span className={isBuying ? '' : 'active'} data-action="sell" onClick={changeAction}>
+                <span className={isBuying ? '' : 'active'} data-action="sell"
+                      onClick={changeAction}>
           Sell
         </span>
             </div>
