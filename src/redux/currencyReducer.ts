@@ -1,11 +1,11 @@
-import { CurrencyReducersTypes } from './actions';
-
+import { ACTIONS_TYPE, CurrencyReducersTypes } from './actions';
 
 export type CurrencyType = {
     currencyName: string;
     buyRate: number;
     sellRate: number;
 };
+
 export type CurrencyState = {
     currencies: Array<CurrencyType>;
     currentCurrency: string;
@@ -38,9 +38,27 @@ const initialState: CurrencyState = {
     amountOfCurrency: '',
 };
 
-export const currencyReducer = (state: CurrencyState = initialState, action: CurrencyReducersTypes): CurrencyState => {
-    // @ts-ignore
+export const currencyReducer = (
+    state: CurrencyState = initialState,
+    action: CurrencyReducersTypes
+): CurrencyState => {
     switch (action.type) {
+        case ACTIONS_TYPE.CHANGE_CURRENCY_FIELD_TYPE:
+            return {
+                ...state,
+                amountOfBYN: action.amountOfBYN,
+                amountOfCurrency: action.amountOfCurrency,
+            };
+        case ACTIONS_TYPE.CHANGE_CHANGE_ACTION:
+            return {
+                ...state,
+                isBuying: action.isBuying,
+            };
+        case ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY:
+            return {
+                ...state,
+                currentCurrency: action.currentCurrency,
+            };
         default:
             return state;
     }
